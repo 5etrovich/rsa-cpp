@@ -14,7 +14,7 @@ RSA encryption algorithm implemented from scratch in C++98, without high-level c
   - genpkey() — generate key pair (public + private + modulus)
   - encrypt(msg) — text to BigNum, then modular exponentiation
   - decrypt(ciphertext) — reverse operation
-  - 	ext2bn / n2text — text <-> BigNum conversion
+  - `text2bn` / `bn2text` — text <-> BigNum conversion
 
 ## Build
 
