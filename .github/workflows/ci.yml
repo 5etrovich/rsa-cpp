@@ -12,9 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install g++
-      run: sudo apt-get update && sudo apt-get install -y g++
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y g++ libssl-dev
     - name: Compile
-      run: g++ -std=c++98 -Wall -Wextra -o program *.cpp
+      run: g++ -std=c++98 -Wall -Wextra -o program *.cpp -lssl -lcrypto
     - name: Run (optional)
       run: ./program
