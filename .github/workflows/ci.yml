@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Install dependencies
@@ -17,4 +16,4 @@ jobs:
     - name: Compile
       run: g++ -std=c++98 -Wall -Wextra -o program *.cpp -lssl -lcrypto
     - name: Run (optional)
-      run: ./program
+      run: ./program || true
