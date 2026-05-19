@@ -1,5 +1,4 @@
-[![CI](https://github.com/5etrovich/rsa-cpp/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/5etrovich/rsa-cpp/actions/workflows/ci.yml)
-
+[![CI](https://github.com/5etrovich/elgamal-cpp/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/5etrovich/rsa-cpp/actions/workflows/ci.yml)
 # rsa-cpp
 
 RSA encryption algorithm implemented from scratch in C++98, without high-level crypto functions.
