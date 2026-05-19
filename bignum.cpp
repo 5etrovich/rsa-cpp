@@ -79,7 +79,7 @@ bool BigNum::coprime(const BigNum& other) const {
     BN_CTX *ctx = BN_CTX_new();
     if (!ctx) return false;
     
-    int res = BN_are_coprime(bn, other.bn, ctx);
+    // int res = BN_are_coprime(bn, other.bn, ctx);
     BN_CTX_free(ctx);
     return res == 1;
 }
