@@ -1,79 +1,29 @@
-﻿# Лабораторная работа №6
-Срок выполнения работы: с 2025-12-04 по 2025-12-11.
-Срок сдачи работы: 2025-11-11.
+﻿# rsa-cpp
 
-Оценка выставляется в 10 балльной шкале.
-После истечения срока работа считается не сданной и оценивается в 0 баллов.
+RSA encryption algorithm implemented from scratch in C++98, without high-level crypto functions.
 
-Все работы проверяются на отсутствие ошибок сборки в автоматическом режиме,
-в случае отсутствия ошибок выполняется ручная проверка кода, в противном
-случае работа оценивается в 0 баллов.
+## What's implemented
 
-В ходе ручной проверки работ оценивается полнота выполнения задания,
-а также качество решения.
+- BigNum class — arbitrary precision arithmetic via OpenSSL BIGNUM:
+  - mod_exp — fast modular exponentiation
+  - mod_inv — modular inverse (extended Euclidean algorithm)
+  - coprime — coprimality check
+  - prime(bits) — prime number generation
 
-Компилятор и операционная система, используемые при проверке:
- GNU Compiler Collection 15.2.0 цель x86_64-slackware-linux
- система Slackware Linux current 2025-09-01.
-Флаги компиляции: `-std=c++98` `-Wall` `-Werror` `-pedantic` `-lm`,
-`-lcrypto`.
+- MyRSA class:
+  - genpkey() — generate key pair (public + private + modulus)
+  - encrypt(msg) — text to BigNum, then modular exponentiation
+  - decrypt(ciphertext) — reverse operation
+  - 	ext2bn / n2text — text <-> BigNum conversion
 
-## Пользовательский тип
+## Build
 
-### Ответвление
-Необходимо создать ответвление (fork) моего репозитория Lab-06 (название
-оставить без изменения, а видимость поставить частной). Назначить меня в
-новом репозитории соавтором с правами администратора. Вики, Задачи а также
-Проекты отключить.
+`ash
+make
+`
 
-В локальной копии создавать ветки (branch) по необходимости.
+Requires: GCC, OpenSSL (-lcrypto)
 
-### Этап разработки
-Разработать программу на языке Си++ стандарта ISO/IEC 14882:1998 реализующую
-задание лабораторной работы.
-Программа должна состоять из нескольких единиц трансляции
-и файла конфигурации системы сборки GNU Make.
+## Stack
 
-#### Общее задание
-Доработать класс `BigNum` из ЛР-5 дополнив его интерфейс:
-  * операция извлечения из потока `>>` (см. `BN_dec2bn`)
-  * метод `BigNum mod_inv(const BigNum& mod) const`
-    (см. `BN_mod_inverse`);
-  * метод `BigNum mod_exp(const BigNum& mod, const BigNum& exp) const`
-    (см. `BN_mod_exp`)
-  * метод `bool coprime(const BigNum& other) const`
-    (см. `BN_are_coprime`);
-  * `static BigNum prime(int bits = 1024)` (см. `BN_generate_prime_ex2()`)
-
-Разработать класс `RSA` в котором реализовать следующий интерфейс:
-  * `RSAKeyPair genpkey() const`, где `RSAKeyPair` задается следующим
-    образом `struct RSAKeyPair{BigNum public, private, modulus;}`;
-  * `void setpkey(const RSAKeyPair& p)`;
-  * `RSAKey getPublicKey() const`, где `RSAKey` задается следующим образом
-    `struct RSAKey{BigNum key, modulus;}`;
-  * `BigNum encrypt(const char* msg) const`;
-  * `const char* decrypt(const BigNum& ciphertext) const`;
-  * `BigNum process(const BigNum&, const RSAKey&)`;
-  * `BigNum text2bn(const char*)`;
-  * `const char* bn2text(const BigNum&)`
-
-Для `RSAKeyPair` и `RSAKey` реализовать операции помещения в поток и
-извлечения из потока.
-
-В основной функции продемонстрировать разработанный функционал создав и
-инициализировав объект класса `RSA`, вывести ключевую пару на экран,
-запросить у пользователя текст для зашифрования, зашифровать текст,
-вывести на экран шифртекст, расшифровать шифртекст, вывести результат
-на экран.
-
-### Этап обсуждения
-По итогу выполнения работы создать запрос на слияние (pull request) 
-и назначить рецензентами всех ассистентов. 
-
-По результатам рецензирования получить минимум один комментарий,
-в случае необходимости внести исправления.
-
-### Справочная информация
-  * [OpenSSL](https://docs.openssl.org/master/man3/)
-  * Нечаев В. И. Элементы криптографии (Основы теории защиты информации) / под ред. Садовничего В. А. — Москва : Высшая школа, 1999. — 109 с. — ISBN: 5-06-003644-8.
-  * Шнайер Б. Прикладная криптография. Протоколы, алгоритмы, исходные тексты на языке Си. — Москва : Издательство ТРИУМФ, 2003. — 816 с. — ISBN: 5-89392-055-4.
+C++98, OpenSSL BIGNUM, GNU Make, Linux
